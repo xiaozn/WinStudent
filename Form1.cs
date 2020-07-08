@@ -19,7 +19,7 @@ namespace WinStudent
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //1111231231222277777
+            
         }
     }
 }
