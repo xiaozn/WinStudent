@@ -52,7 +52,7 @@
             this.exitSystem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(806, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,7 +62,7 @@
             this.subAddStudent,
             this.subStudentList});
             this.miStudent.Name = "miStudent";
-            this.miStudent.Size = new System.Drawing.Size(83, 26);
+            this.miStudent.Size = new System.Drawing.Size(83, 24);
             this.miStudent.Text = "学生管理";
             // 
             // subAddStudent
@@ -70,12 +70,14 @@
             this.subAddStudent.Name = "subAddStudent";
             this.subAddStudent.Size = new System.Drawing.Size(224, 26);
             this.subAddStudent.Text = "新增学生";
+            this.subAddStudent.Click += new System.EventHandler(this.subAddStudent_Click);
             // 
             // subStudentList
             // 
             this.subStudentList.Name = "subStudentList";
             this.subStudentList.Size = new System.Drawing.Size(224, 26);
             this.subStudentList.Text = "学生列表";
+            this.subStudentList.Click += new System.EventHandler(this.subStudentList_Click);
             // 
             // miClass
             // 
@@ -129,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(806, 576);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;

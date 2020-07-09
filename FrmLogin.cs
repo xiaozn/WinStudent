@@ -61,6 +61,9 @@ namespace WinStudent
                     int count = (int)o;
                     MessageBox.Show("登陆成功", "登陆提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //转到主页面
+                    FrmMain frmMain = new FrmMain();
+                    frmMain.Show();
+                    this.Hide();
                 }
             }
 
