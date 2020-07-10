@@ -28,7 +28,7 @@ namespace WinStudent
             frmAddStudent.Show();
         }
         /// <summary>
-        /// 学生列表,不可以打开多个列表
+        /// 学生列表,不可以打开多个列表--单例或者判断窗体是否打开
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
