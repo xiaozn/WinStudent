@@ -35,10 +35,10 @@
             this.miClass = new System.Windows.Forms.ToolStripMenuItem();
             this.subAddClass = new System.Windows.Forms.ToolStripMenuItem();
             this.subClassList = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitSystem = new System.Windows.Forms.ToolStripMenuItem();
             this.miGrade = new System.Windows.Forms.ToolStripMenuItem();
             this.subAddGrade = new System.Windows.Forms.ToolStripMenuItem();
             this.subGradeList = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitSystem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +52,8 @@
             this.exitSystem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(806, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(604, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -62,20 +63,20 @@
             this.subAddStudent,
             this.subStudentList});
             this.miStudent.Name = "miStudent";
-            this.miStudent.Size = new System.Drawing.Size(83, 24);
+            this.miStudent.Size = new System.Drawing.Size(68, 21);
             this.miStudent.Text = "学生管理";
             // 
             // subAddStudent
             // 
             this.subAddStudent.Name = "subAddStudent";
-            this.subAddStudent.Size = new System.Drawing.Size(224, 26);
+            this.subAddStudent.Size = new System.Drawing.Size(124, 22);
             this.subAddStudent.Text = "新增学生";
             this.subAddStudent.Click += new System.EventHandler(this.subAddStudent_Click);
             // 
             // subStudentList
             // 
             this.subStudentList.Name = "subStudentList";
-            this.subStudentList.Size = new System.Drawing.Size(224, 26);
+            this.subStudentList.Size = new System.Drawing.Size(124, 22);
             this.subStudentList.Text = "学生列表";
             this.subStudentList.Click += new System.EventHandler(this.subStudentList_Click);
             // 
@@ -85,26 +86,22 @@
             this.subAddClass,
             this.subClassList});
             this.miClass.Name = "miClass";
-            this.miClass.Size = new System.Drawing.Size(83, 26);
+            this.miClass.Size = new System.Drawing.Size(68, 21);
             this.miClass.Text = "班级管理";
             // 
             // subAddClass
             // 
             this.subAddClass.Name = "subAddClass";
-            this.subAddClass.Size = new System.Drawing.Size(224, 26);
+            this.subAddClass.Size = new System.Drawing.Size(180, 22);
             this.subAddClass.Text = "新增班级";
+            this.subAddClass.Click += new System.EventHandler(this.subAddClass_Click);
             // 
             // subClassList
             // 
             this.subClassList.Name = "subClassList";
-            this.subClassList.Size = new System.Drawing.Size(224, 26);
+            this.subClassList.Size = new System.Drawing.Size(180, 22);
             this.subClassList.Text = "班级列表";
-            // 
-            // exitSystem
-            // 
-            this.exitSystem.Name = "exitSystem";
-            this.exitSystem.Size = new System.Drawing.Size(83, 26);
-            this.exitSystem.Text = "退出系统";
+            this.subClassList.Click += new System.EventHandler(this.subClassList_Click);
             // 
             // miGrade
             // 
@@ -112,29 +109,37 @@
             this.subAddGrade,
             this.subGradeList});
             this.miGrade.Name = "miGrade";
-            this.miGrade.Size = new System.Drawing.Size(83, 26);
+            this.miGrade.Size = new System.Drawing.Size(68, 21);
             this.miGrade.Text = "年级管理";
             // 
             // subAddGrade
             // 
             this.subAddGrade.Name = "subAddGrade";
-            this.subAddGrade.Size = new System.Drawing.Size(224, 26);
+            this.subAddGrade.Size = new System.Drawing.Size(124, 22);
             this.subAddGrade.Text = "新增年级";
             // 
             // subGradeList
             // 
             this.subGradeList.Name = "subGradeList";
-            this.subGradeList.Size = new System.Drawing.Size(224, 26);
+            this.subGradeList.Size = new System.Drawing.Size(180, 22);
             this.subGradeList.Text = "年级列表";
+            this.subGradeList.Click += new System.EventHandler(this.subGradeList_Click);
+            // 
+            // exitSystem
+            // 
+            this.exitSystem.Name = "exitSystem";
+            this.exitSystem.Size = new System.Drawing.Size(68, 21);
+            this.exitSystem.Text = "退出系统";
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(806, 576);
+            this.ClientSize = new System.Drawing.Size(604, 461);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmMain";
             this.Text = "学生管理系统主页面";
             this.menuStrip1.ResumeLayout(false);
