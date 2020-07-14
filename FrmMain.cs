@@ -104,5 +104,32 @@ namespace WinStudent
                 frmGradeList.Show();
             }
         }
+        /// <summary>
+        /// 窗体关闭，退出应用程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("确定要退出系统吗？", "退出提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Application.ExitThread();
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+            
+        }
+        /// <summary>
+        /// 退出系统
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exitSystem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

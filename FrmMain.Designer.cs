@@ -130,6 +130,7 @@
             this.exitSystem.Name = "exitSystem";
             this.exitSystem.Size = new System.Drawing.Size(68, 21);
             this.exitSystem.Text = "退出系统";
+            this.exitSystem.Click += new System.EventHandler(this.exitSystem_Click);
             // 
             // FrmMain
             // 
@@ -142,6 +143,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FrmMain";
             this.Text = "学生管理系统主页面";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
