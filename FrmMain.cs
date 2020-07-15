@@ -41,8 +41,6 @@ namespace WinStudent
                 frmStudentList.MdiParent = this;
                 frmStudentList.Show();
             }
-            
-
         }
         /// <summary>
         /// 检查窗体是否已经打开
