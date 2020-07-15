@@ -41,7 +41,7 @@ namespace WinStudent
             {
                 
                 //写查询语句
-                string sql = "select count(1) from UserInfos where UserName=@UserName and UserPwd=@UserPwd";
+                string sql = "select count(1) from UserInfo where UserName=@UserName and UserPwd=@UserPwd";
                 
                 SqlParameter[] paras =
                 {
