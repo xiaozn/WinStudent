@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 namespace WinStudent
 {
@@ -29,6 +30,25 @@ namespace WinStudent
                 o = cmd.ExecuteScalar();//执行查询,返回结果集第一行第一列的值,忽略其他行或者列
             } 
             return o;
+        }
+
+        public static DataTable GetDataTable(string sql,params SqlParameter[] paras)
+        {
+            DataTable dt = new DataTable();
+            using(SqlConnection conn=new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                if (paras != null)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddRange(paras);
+                }
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+                sqlDataAdapter.SelectCommand = cmd;
+                sqlDataAdapter.Fill(dt);
+            }
+
+            return dt;
         }
     }
 }

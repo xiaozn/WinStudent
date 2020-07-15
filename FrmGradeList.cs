@@ -16,5 +16,12 @@ namespace WinStudent
         {
             InitializeComponent();
         }
+
+        private void FrmGradeList_Load(object sender, EventArgs e)
+        {
+            string sql = "select GradeId,GradeName from GradeInfo";
+            DataTable dtGradeList = SqlHelper.GetDataTable(sql);
+            dgvGradeList.DataSource = dtGradeList;
+        }
     }
 }
