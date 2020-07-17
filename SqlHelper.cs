@@ -50,5 +50,19 @@ namespace WinStudent
 
             return dt;
         }
+
+        public static int ExecuteNoQuery(string sql,params SqlParameter[] paras)
+        {
+            using(SqlConnection conn=new SqlConnection(connString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                if (paras != null)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddRange(paras);
+                }
+            }
+
+        }
     }
 }
