@@ -36,7 +36,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(76, 98);
+            this.label1.Location = new System.Drawing.Point(34, 123);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
@@ -44,19 +44,20 @@
             // 
             // txtGradeName
             // 
-            this.txtGradeName.Location = new System.Drawing.Point(150, 95);
+            this.txtGradeName.Location = new System.Drawing.Point(108, 120);
             this.txtGradeName.Name = "txtGradeName";
             this.txtGradeName.Size = new System.Drawing.Size(135, 21);
             this.txtGradeName.TabIndex = 1;
             // 
             // btnAddGrade
             // 
-            this.btnAddGrade.Location = new System.Drawing.Point(306, 95);
+            this.btnAddGrade.Location = new System.Drawing.Point(264, 120);
             this.btnAddGrade.Name = "btnAddGrade";
             this.btnAddGrade.Size = new System.Drawing.Size(75, 23);
             this.btnAddGrade.TabIndex = 2;
             this.btnAddGrade.Text = "添加年级";
             this.btnAddGrade.UseVisualStyleBackColor = true;
+            this.btnAddGrade.Click += new System.EventHandler(this.btnAddGrade_Click);
             // 
             // FrmAddGrade
             // 
