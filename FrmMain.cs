@@ -129,5 +129,16 @@ namespace WinStudent
         {
             Application.Exit();
         }
+        /// <summary>
+        /// 新增年级功能
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void subAddGrade_Click(object sender, EventArgs e)
+        {
+            FrmAddGrade frmAddGrade = new FrmAddGrade();
+            frmAddGrade.MdiParent = this;
+            frmAddGrade.Show();
+        }
     }
 }

@@ -92,14 +92,14 @@
             // subAddClass
             // 
             this.subAddClass.Name = "subAddClass";
-            this.subAddClass.Size = new System.Drawing.Size(180, 22);
+            this.subAddClass.Size = new System.Drawing.Size(124, 22);
             this.subAddClass.Text = "新增班级";
             this.subAddClass.Click += new System.EventHandler(this.subAddClass_Click);
             // 
             // subClassList
             // 
             this.subClassList.Name = "subClassList";
-            this.subClassList.Size = new System.Drawing.Size(180, 22);
+            this.subClassList.Size = new System.Drawing.Size(124, 22);
             this.subClassList.Text = "班级列表";
             this.subClassList.Click += new System.EventHandler(this.subClassList_Click);
             // 
@@ -115,8 +115,9 @@
             // subAddGrade
             // 
             this.subAddGrade.Name = "subAddGrade";
-            this.subAddGrade.Size = new System.Drawing.Size(124, 22);
+            this.subAddGrade.Size = new System.Drawing.Size(180, 22);
             this.subAddGrade.Text = "新增年级";
+            this.subAddGrade.Click += new System.EventHandler(this.subAddGrade_Click);
             // 
             // subGradeList
             // 
@@ -140,7 +141,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmMain";
             this.Text = "学生管理系统主页面";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmMain_FormClosing);

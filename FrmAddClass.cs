@@ -67,7 +67,24 @@ namespace WinStudent
                 if(oCount==null || oCount==DBNull.Value || ((int)oCount) == 0)
                 {
                     //添加操作
-
+                    string sqlAdd = "insert into ClassInfo (ClassName,GradeId,Remark) values (@ClassName,@GradeId,@Remark)";
+                    SqlParameter[] parasAdd =
+                    {
+                        new SqlParameter("@ClassName",className),
+                        new SqlParameter("@GradeId",gradeId),
+                        new SqlParameter("@Remark",remark)
+                    };
+                    //执行并返回值
+                    int count = SqlHelper.ExecuteNoQuery(sqlAdd, parasAdd);
+                    if (count > 0)
+                    {
+                        MessageBox.Show($"班级:{className} 添加成功！", "添加班级提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("班级添加失败", "班级添加提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
                 else
                 {
@@ -76,6 +93,15 @@ namespace WinStudent
                 }
             }
 
+        }
+        /// <summary>
+        /// 关闭当前窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClosed_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

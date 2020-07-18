@@ -50,9 +50,15 @@ namespace WinStudent
 
             return dt;
         }
-
+        /// <summary>
+        /// 返回受影响的行数,增删改都可以用
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="paras"></param>
+        /// <returns></returns>
         public static int ExecuteNoQuery(string sql,params SqlParameter[] paras)
         {
+            int count = 0;
             using(SqlConnection conn=new SqlConnection(connString))
             {
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -61,7 +67,10 @@ namespace WinStudent
                     cmd.Parameters.Clear();
                     cmd.Parameters.AddRange(paras);
                 }
+                conn.Open();
+                count = cmd.ExecuteNonQuery();
             }
+            return count;
 
         }
     }
