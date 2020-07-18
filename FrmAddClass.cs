@@ -101,7 +101,7 @@ namespace WinStudent
         /// <param name="e"></param>
         private void btnClosed_Click(object sender, EventArgs e)
         {
-            
+            this.Close();
         }
     }
 }

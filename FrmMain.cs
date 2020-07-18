@@ -34,7 +34,7 @@ namespace WinStudent
         /// <param name="e"></param>
         private void subStudentList_Click(object sender, EventArgs e)
         {
-            bool isOpen = CheckFormIsOpen(typeof(FrmAddStudent).Name);
+            bool isOpen = CheckFormIsOpen(typeof(FrmStudentList).Name);
             if (!isOpen)
             {
                 FrmStudentList frmStudentList = FrmStudentList.CreateInstance();
