@@ -73,5 +73,30 @@ namespace WinStudent
             return count;
 
         }
+
+        public static SqlDataReader ExecuteReader(string sql,params SqlParameter[] paras)
+        {
+            SqlConnection conn = new SqlConnection(connString);
+            
+            try
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                if (paras.Length > 0)
+                {
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddRange(paras);
+                }
+                SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return dr;
+            }
+            catch (Exception ex)
+            {
+                conn.Close();
+                throw new Exception("执行查询出现异常", ex);
+                
+            }
+            
+        }
     }
 }

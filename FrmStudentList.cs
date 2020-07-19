@@ -136,6 +136,7 @@ namespace WinStudent
         {
             if (e.RowIndex != -1)
             {
+                DataRow dr = (dgvStudents.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
                 //获取点击的单元格
                 DataGridViewCell cell = dgvStudents.Rows[e.RowIndex].Cells[e.ColumnIndex];
 
@@ -143,11 +144,20 @@ namespace WinStudent
                 if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString() == "修改")
                 {
                     //修改操作，打开修改页面，并把StudentId传过去
-
+                    //传值：1.构造函数  2.Tag属性（推荐）  3.公共参数
+                    int stuId = (int)dr["StudentId"];
+                    //1.构造函数
+                    FrmEditStudent frmEditStudent = new FrmEditStudent(stuId);
+                    //2.tag属性
+                    frmEditStudent.Tag = stuId;
+                    //3.公共参数
+                    frmEditStudent.pubStuId = stuId;
+                    frmEditStudent.MdiParent = this.MdiParent;
+                    frmEditStudent.Show();
                 }
                 else if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString() == "删除")
                 {
-                    DataRow dr = (dgvStudents.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
+                    
                     int stuId = int.Parse(dr["StudentId"].ToString());
                     string stuName = dr["StudentName"].ToString();
                     //删除操作

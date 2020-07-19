@@ -158,10 +158,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtStuName);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FrmAddStudent";
-            this.Text = "新增学生";
+            this.Text = "新增学生信息";
             this.Load += new System.EventHandler(this.FrmAddStudent_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
