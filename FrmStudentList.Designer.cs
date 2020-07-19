@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnFind = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -35,11 +37,15 @@
             this.txtStuName = new System.Windows.Forms.TextBox();
             this.cboClasses = new System.Windows.Forms.ComboBox();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
+            this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.StudentId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StudentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClassName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEdit = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.colDel = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +55,7 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.btnFind);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -63,9 +70,9 @@
             // 
             // btnFind
             // 
-            this.btnFind.Location = new System.Drawing.Point(421, 32);
+            this.btnFind.Location = new System.Drawing.Point(392, 31);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(75, 23);
+            this.btnFind.Size = new System.Drawing.Size(64, 23);
             this.btnFind.TabIndex = 4;
             this.btnFind.Text = "查询";
             this.btnFind.UseVisualStyleBackColor = true;
@@ -109,17 +116,26 @@
             this.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCheck,
             this.StudentId,
             this.StudentName,
             this.ClassName,
             this.Sex,
-            this.Phone});
+            this.Phone,
+            this.colEdit,
+            this.colDel});
             this.dgvStudents.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvStudents.Location = new System.Drawing.Point(0, 101);
             this.dgvStudents.Name = "dgvStudents";
             this.dgvStudents.RowTemplate.Height = 23;
             this.dgvStudents.Size = new System.Drawing.Size(549, 190);
             this.dgvStudents.TabIndex = 1;
+            this.dgvStudents.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStudents_CellContentClick);
+            // 
+            // colCheck
+            // 
+            this.colCheck.HeaderText = "选择";
+            this.colCheck.Name = "colCheck";
             // 
             // StudentId
             // 
@@ -138,7 +154,7 @@
             // ClassName
             // 
             this.ClassName.DataPropertyName = "ClassName";
-            this.ClassName.HeaderText = "班级名称";
+            this.ClassName.HeaderText = "班级";
             this.ClassName.Name = "ClassName";
             this.ClassName.ReadOnly = true;
             // 
@@ -155,6 +171,30 @@
             this.Phone.HeaderText = "电话";
             this.Phone.Name = "Phone";
             this.Phone.ReadOnly = true;
+            // 
+            // colEdit
+            // 
+            dataGridViewCellStyle1.NullValue = "修改";
+            this.colEdit.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colEdit.HeaderText = "修改";
+            this.colEdit.Name = "colEdit";
+            // 
+            // colDel
+            // 
+            dataGridViewCellStyle2.NullValue = "删除";
+            this.colDel.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDel.HeaderText = "删除";
+            this.colDel.Name = "colDel";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(462, 31);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(56, 23);
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "删除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // FrmStudentList
             // 
@@ -184,10 +224,14 @@
         private System.Windows.Forms.TextBox txtStuName;
         private System.Windows.Forms.ComboBox cboClasses;
         private System.Windows.Forms.DataGridView dgvStudents;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn colCheck;
         private System.Windows.Forms.DataGridViewTextBoxColumn StudentId;
         private System.Windows.Forms.DataGridViewTextBoxColumn StudentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClassName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phone;
+        private System.Windows.Forms.DataGridViewLinkColumn colEdit;
+        private System.Windows.Forms.DataGridViewLinkColumn colDel;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

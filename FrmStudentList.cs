@@ -36,7 +36,7 @@ namespace WinStudent
 
         private void LoadAllStudentList()
         {
-            string sql = "select StudentId,StudentName,ClassName,GradeName,Sex,Phone from StudentInfo s " + "inner join ClassInfo c on c.ClassId=s.ClassId "+"inner join GradeInfo g on g.GradeId=c.GradeId";
+            string sql = "select StudentId,StudentName,ClassName,GradeName,Sex,Phone from StudentInfo s " + "inner join ClassInfo c on c.ClassId=s.ClassId "+"inner join GradeInfo g on g.GradeId=c.GradeId"+" where s.IsDeleted=0";
             //加载数据
             DataTable dtStudents = SqlHelper.GetDataTable(sql);
             //数据的组装
@@ -92,7 +92,7 @@ namespace WinStudent
             string stuName = txtStuName.Text.Trim();
 
 
-            string sql = "select StudentId,StudentName,ClassName,GradeName,Sex,Phone from StudentInfo s " + "inner join ClassInfo c on c.ClassId=s.ClassId " + "inner join GradeInfo g on g.GradeId=c.GradeId";
+            string sql = "select StudentId,StudentName,ClassName,GradeName,Sex,Phone from StudentInfo s " + "inner join ClassInfo c on c.ClassId=s.ClassId " + "inner join GradeInfo g on g.GradeId=c.GradeId"+" where s.IsDeleted=0";
             sql += " where 1=1";
             if (classId > 0)
             {
@@ -102,6 +102,7 @@ namespace WinStudent
             {
                 sql += " and StudentName like @StudentName";
             }
+            sql += " where s.IsDeleted=0";
             sql += " order by StudentId";
             SqlParameter[] paras =
             {
@@ -125,6 +126,160 @@ namespace WinStudent
             dgvStudents.AutoGenerateColumns = false;
             //绑定数据
             dgvStudents.DataSource = dtStudents;
+        }
+        /// <summary>
+        /// 修改或删除功能实现
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvStudents_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                //获取点击的单元格
+                DataGridViewCell cell = dgvStudents.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                //判断是修改还是删除
+                if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString() == "修改")
+                {
+                    //修改操作，打开修改页面，并把StudentId传过去
+
+                }
+                else if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString() == "删除")
+                {
+                    DataRow dr = (dgvStudents.Rows[e.RowIndex].DataBoundItem as DataRowView).Row;
+                    int stuId = int.Parse(dr["StudentId"].ToString());
+                    string stuName = dr["StudentName"].ToString();
+                    //删除操作
+                    if (MessageBox.Show($"确定删除学生：{stuName} 的信息吗？", "删除学生提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question)==DialogResult.Yes)
+                    {
+                        //假删除 isdeleted  0--->1
+                        string sqlDel0 = "update StudentInfo set IsDeleted=1 where StudentId=@StudentId";
+                        SqlParameter para = new SqlParameter("@StudentId", stuId);
+                        int count = SqlHelper.ExecuteNoQuery(sqlDel0, para);
+                        if (count > 0)
+                        {
+                            MessageBox.Show("该学生信息删除成功", "删除学生信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            //手动刷新datagridview
+                            DataTable dtStudents = (DataTable)dgvStudents.DataSource;
+                            dgvStudents.DataSource = null;
+                            dtStudents.Rows.Remove(dr);
+                            dgvStudents.DataSource = dtStudents;
+                        }
+                        else
+                        {
+                            MessageBox.Show("学生信息删除失败", "删除提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        //真删除
+                        //string sqlDel0 = "delete StudentInfo where StudentId=@StudentId";
+                        //SqlParameter para = new SqlParameter("@StudentId", stuId);
+                        //int count = SqlHelper.ExecuteNoQuery(sqlDel0, para);
+                        //if (count > 0)
+                        //{
+                        //    MessageBox.Show("该学生信息删除成功", "删除学生信息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //    //手动刷新datagridview
+                        //    DataTable dtStudents = (DataTable)dgvStudents.DataSource;
+                        //    dgvStudents.DataSource = null;
+                        //    dtStudents.Rows.Remove(dr);
+                        //    dgvStudents.DataSource = dtStudents;
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("学生信息删除失败", "删除提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //    return;
+                        //}
+
+                    }
+
+                }
+            }
+                
+
+        }
+        /// <summary>
+        /// 多行删除
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //获取到要删除的数据的StudentId
+            //判断选择的个数如果为0，没有选择，提示用户选择，大于0，继续
+            //删除操作 事务，sql事务，代码里面启动事务
+            List<int> listIds = new List<int>();
+            for (int i = 0; i < dgvStudents.Rows.Count; i++)
+            {
+                DataGridViewCheckBoxCell cell = dgvStudents.Rows[i].Cells["colCheck"] as DataGridViewCheckBoxCell;
+                bool chk = Convert.ToBoolean(cell.Value);
+                if (chk)
+                {
+                    //获取行数据
+                    DataRow dr = (dgvStudents.Rows[i].DataBoundItem as DataRowView).Row;
+                    int stuId =(int) dr["StudentId"];
+                    listIds.Add(stuId);
+                }
+            }
+            //真删除
+            if (listIds.Count == 0)
+            {
+                MessageBox.Show("请选择要删除的学生信息", "删除学生提示");
+                return;
+            }
+            else
+            {
+                if (MessageBox.Show("确定要删除吗？", "删除信息提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    int count = 0;
+                    //启动事务
+                    using (SqlConnection conn=new SqlConnection(SqlHelper.connString))
+                    {
+                        //事务启动是通过conn来开启，并且conn是open的状态
+                        conn.Open();  
+                        SqlTransaction trans = conn.BeginTransaction();
+                        //sqlcommand 事务执行
+                        SqlCommand cmd = new SqlCommand();
+                        cmd.Connection = conn;
+                        cmd.Transaction = trans; 
+                        try
+                        {
+                            foreach (int id in listIds)
+                            {
+                                cmd.CommandText = "delete from StudentInfo where StudentId=@StudentId";
+                                SqlParameter para =new SqlParameter("@StudentId", id);
+                                cmd.Parameters.Clear();
+                                cmd.Parameters.Add(para);
+                                count += cmd.ExecuteNonQuery();
+                            }
+                            trans.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            trans.Rollback();
+                            MessageBox.Show("删除学生出现异常", "删除学生提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    if (count==listIds.Count)
+                    {
+                        MessageBox.Show("删除学生成功", "删除学生提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //手动刷新
+                        DataTable dtStudents = (DataTable)dgvStudents.DataSource;
+                        string idStr = string.Join(",",listIds);
+                        DataRow[] rows = dtStudents.Select("StudentId in ("+idStr+")");
+                        foreach (DataRow dr in rows)
+                        {
+                            dtStudents.Rows.Remove(dr);
+                        }
+                        dgvStudents.DataSource = dtStudents;
+                    }
+
+                }
+            }
+
+            
+
+
         }
     }
 }
