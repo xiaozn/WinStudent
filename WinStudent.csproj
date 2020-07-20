@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandInfo.cs" />
     <Compile Include="FrmAddClass.cs">
       <SubType>Form</SubType>
     </Compile>

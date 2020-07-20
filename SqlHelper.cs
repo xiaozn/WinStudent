@@ -98,5 +98,47 @@ namespace WinStudent
             }
             
         }
+
+        public static bool ExecuteTrans(List<CommandInfo> comList)
+        {
+            using (SqlConnection conn=new SqlConnection(connString))
+            {
+                conn.Open();
+                SqlTransaction trans = conn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+                cmd.Transaction = trans;
+                try
+                {
+                    int count = 0;
+                    for (int i = 0; i < comList.Count; i++)
+                    {
+                        cmd.CommandText = comList[i].CommandText;
+                        if (comList[i].IsProc)
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                        }
+                        else
+                        {
+                            cmd.CommandType = CommandType.Text;
+                        }
+                        if (comList[i].parameters.Length>0)
+                        {
+                            cmd.Parameters.Clear();
+                            cmd.Parameters.AddRange(comList[i].parameters);
+                        }
+                        count += cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+                    trans.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    throw new Exception("执行事务出现异常",ex);
+                }
+            }
+        }
     }
 }
