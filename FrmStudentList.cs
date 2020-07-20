@@ -17,6 +17,9 @@ namespace WinStudent
         {
             InitializeComponent();
         }
+        //内置委托 action不带返回值，可以不带参数，带参数最多16个
+        //func带一个返回值，可以不带参数，单参数最多16个
+        public Action reLoad = null;
         //实现单例
         private static FrmStudentList frmStudentList = null;
         public static FrmStudentList CreateInstance()
@@ -145,11 +148,16 @@ namespace WinStudent
                 {
                     //修改操作，打开修改页面，并把StudentId传过去
                     //传值：1.构造函数  2.Tag属性（推荐）  3.公共参数
+                    reLoad = LoadAllStudentList;//赋值给委托
                     int stuId = (int)dr["StudentId"];
                     //1.构造函数
                     FrmEditStudent frmEditStudent = new FrmEditStudent(stuId);
                     //2.tag属性
-                    frmEditStudent.Tag = stuId;
+                    frmEditStudent.Tag = new TagObject() {
+                        StudentId = stuId,
+                        Reload = reLoad
+                    };
+                   
                     //3.公共参数
                     frmEditStudent.pubStuId = stuId;
                     frmEditStudent.MdiParent = this.MdiParent;
