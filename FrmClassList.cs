@@ -13,6 +13,7 @@ namespace WinStudent
 {
     public partial class FrmClassList : Form
     {
+        private Action reLoad=null;
         public FrmClassList()
         {
             InitializeComponent();
@@ -92,7 +93,16 @@ namespace WinStudent
                 int classId = (int)dr["ClassId"];
                 if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString()=="修改")
                 {
-
+                    reLoad = InitAllClasses;
+                    FrmEditClass frmEditClass = new FrmEditClass();
+                    
+                    frmEditClass.Tag = new TagObject()
+                    {
+                        EditId = classId,
+                        Reload = reLoad
+                    };
+                    frmEditClass.MdiParent = this.MdiParent;
+                    frmEditClass.Show();
                 }
                 else if (cell is DataGridViewLinkCell && cell.FormattedValue.ToString() == "删除")
                 {

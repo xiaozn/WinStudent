@@ -154,7 +154,7 @@ namespace WinStudent
                     FrmEditStudent frmEditStudent = new FrmEditStudent(stuId);
                     //2.tag属性
                     frmEditStudent.Tag = new TagObject() {
-                        StudentId = stuId,
+                        EditId = stuId,
                         Reload = reLoad
                     };
                    

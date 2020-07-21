@@ -8,7 +8,7 @@ namespace WinStudent
 {
     public class TagObject
     {
-        public int StudentId { get; set; }
+        public int EditId { get; set; }
         public Action Reload { get; set; }
     }
 }

@@ -105,7 +105,7 @@ namespace WinStudent
             if(this.Tag!=null)
             {
                 TagObject tagObject = (TagObject)this.Tag;
-                stuId = tagObject.StudentId;
+                stuId = tagObject.EditId;
                 reLoad = tagObject.Reload;
             }
             //查询数据
