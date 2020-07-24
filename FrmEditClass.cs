@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -45,7 +46,28 @@ namespace WinStudent
                 TagObject tagObject = (TagObject)this.Tag;
                 classId = tagObject.EditId;
                 reLoad = tagObject.Reload;
+
             }
+            string sql = "select ClassName,GradeId,Remark from ClassInfo where ClassId=@ClassId";
+            SqlParameter paraId = new SqlParameter("@ClassId", classId);
+            SqlDataReader dr = SqlHelper.ExecuteReader(sql, paraId);
+            if (dr.Read())
+            {
+                txtClassName.Text = dr["ClassName"].ToString();
+                txtRemark.Text = dr["Remark"].ToString();
+                int gradeId = (int)dr["GradeId"];
+                cboGrades.SelectedValue = gradeId;
+            }
+            dr.Close();
+        }
+        /// <summary>
+        /// 提交修改信息 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
