@@ -67,7 +67,13 @@ namespace WinStudent
         /// <param name="e"></param>
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            //获取页面输入
 
+            //判断是否为空
+
+            //判断是否已存在，再同一年级下，班级名称不能同名
+
+            //修改提交
         }
     }
 }
